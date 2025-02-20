@@ -4,8 +4,8 @@ import streamlit as st
 import pandas as pd
 from sklearn.metrics import accuracy_score
 
-# Set dark mode page title and layout
-st.set_page_config(page_title="🌑 Diabetes Prediction", layout="wide", page_icon="🩺")
+# Set page title and layout
+st.set_page_config(page_title="💉 Diabetes Prediction", layout="wide", page_icon="🌟")
 
 # Load the trained model
 diabetes_model_path = r"C:\Users\Asus\Desktop\disease prediction\diabetes_model.sav"
@@ -16,70 +16,94 @@ try:
 except Exception as e:
     st.error(f"⚠ Error loading the model: {e}")
 
-# Dark mode CSS styling
+# Modern CSS Styling
 st.markdown("""
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    
     body {
-        background-color: #1E1E1E;
-        color: #EAEAEA;
-        font-family: 'Poppins', sans-serif;
+        background: black);
+        color: #F8F9FA;
+        font-family: 'Inter', sans-serif;
     }
     .stApp {
-        background: linear-gradient(135deg, #121212, #1A1A1A);
+        background: transparent;
     }
     .stButton>button {
-        background-color: #007BFF;
+        background: linear-gradient(90deg, #00C9FF, #92FE9D);
         color: white;
-        border-radius: 10px;
-        padding: 12px;
-        width: 100%;
+        font-size: 16px;
         font-weight: bold;
         border: none;
-        transition: 0.3s;
-        box-shadow: 0px 4px 8px rgba(0, 123, 255, 0.3);
+        border-radius: 12px;
+        padding: 14px 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease-in-out;
     }
     .stButton>button:hover {
-        background-color: #0056b3;
         transform: scale(1.05);
+        box-shadow: 0px 6px 15px rgba(0, 201, 255, 0.6);
     }
     .stTextInput>div>div>input {
-        border-radius: 8px;
+        background-color: #303344;
+        color: #F8F9FA;
+        border: 2px solid #44475A;
+        border-radius: 10px;
         padding: 10px;
-        border: 2px solid #3A3A3A;
-        background-color: #252525;
-        color: #EAEAEA;
+        font-size: 15px;
     }
-    .prediction-box {
-        font-size: 18px;
-        font-weight: bold;
-        padding: 12px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0px 4px 8px rgba(255, 255, 255, 0.1);
+    .stTextInput>div>div>input::placeholder {
+        color: #BFBFBF;
     }
     .header {
         text-align: center;
-        color: #00E676;
+        color: #92FE9D;
         font-weight: bold;
-        font-size: 30px;
+        font-size: 36px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    }
+    .subheader {
+        text-align: center;
+        color: #A1CAF1;
+        font-size: 20px;
+        margin-bottom: 30px;
     }
     .accuracy-box {
-        background-color: #252525;
-        color: #00E676;
-        font-size: 16px;
-        padding: 10px;
-        border-radius: 10px;
+        background: #2B2D42;
+        color: #00FFC6;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 12px;
+        border-radius: 12px;
         text-align: center;
-        box-shadow: 0px 2px 6px rgba(0,0,0,0.2);
+        box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
+    }
+    .prediction-box {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 16px;
+        border-radius: 15px;
+        text-align: center;
+        margin-top: 20px;
+        box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    .diabetic {
+        background-color: #FF5E57;
+        color: white;
+    }
+    .not-diabetic {
+        background-color: #3ECF8E;
+        color: white;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Title
-st.markdown("<h1 class='header'>Diabetes Prediction using ML</h1>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center;'>Enter your details below to check your diabetes risk.</h3>", unsafe_allow_html=True)
+# Title and Subheader
+st.markdown("<h1 class='header'>💉 Diabetes Prediction</h1>", unsafe_allow_html=True)
+st.markdown("<h3 class='subheader'>Enter your details below to assess your diabetes risk</h3>", unsafe_allow_html=True)
 
-# Load dataset for real-time accuracy calculation (Replace with actual dataset path)
+# Load dataset for real-time accuracy calculation
 dataset_path = r"C:\Users\Asus\Desktop\disease prediction\diabetes.csv"
 
 try:
@@ -101,7 +125,7 @@ try:
         Glucose = st.text_input("Glucose Level", "0")
 
     with col3:
-        BloodPressure = st.text_input(" Blood Pressure", "0")
+        BloodPressure = st.text_input("Blood Pressure", "0")
 
     with col1:
         SkinThickness = st.text_input("Skin Thickness", "0")
@@ -131,13 +155,13 @@ try:
             # Predict diabetes
             diab_prediction = diabetes_model.predict(user_input)
 
-            st.markdown(f"<div class='accuracy-box'> Model Accuracy: <b>{real_time_accuracy*100:.2f}%</b></div>", unsafe_allow_html=True)
+            st.markdown(f"<div class='accuracy-box'>Model Accuracy: <b>{real_time_accuracy*100:.2f}%</b></div>", unsafe_allow_html=True)
 
-            # Display result with dark theme
+            # Display result with modern styling
             if diab_prediction[0] == 1:
-                st.markdown("<div class='prediction-box' style='background-color: #FF5252; color: white;'> The person is DIABETIC.</div>", unsafe_allow_html=True)
+                st.markdown("<div class='prediction-box diabetic'> The person is DIABETIC.</div>", unsafe_allow_html=True)
             else:
-                st.markdown("<div class='prediction-box' style='background-color: #00E676; color: #1E1E1E;'> The person is NOT DIABETIC.</div>", unsafe_allow_html=True)
+                st.markdown("<div class='prediction-box not-diabetic'>The person is NOT DIABETIC.</div>", unsafe_allow_html=True)
 
         except ValueError:
             st.error("⚠ Please enter valid numerical values.")
