@@ -104,7 +104,7 @@ st.markdown("<h1 class='header'>💉 Diabetes Prediction</h1>", unsafe_allow_htm
 st.markdown("<h3 class='subheader'>Enter your details below to assess your diabetes risk</h3>", unsafe_allow_html=True)
 
 # Load dataset for real-time accuracy calculation
-dataset_path = r"C:\Users\Asus\Desktop\disease prediction\diabetes.csv"
+dataset_path = r"diabetes.csv"
 
 try:
     data = pd.read_csv(dataset_path)
