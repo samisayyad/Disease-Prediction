@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score
 st.set_page_config(page_title="💉 Diabetes Prediction", layout="wide", page_icon="🌟")
 
 # Load the trained model
-diabetes_model_path = r"C:\Users\Asus\Desktop\disease prediction\diabetes_model.sav"
+diabetes_model_path = r"diabetes_model.sav"
 
 try:
     with open(diabetes_model_path, "rb") as model_file:
